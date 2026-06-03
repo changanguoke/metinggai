@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meting Music - 音乐搜索 & 格式转换</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .app-container { max-width: 480px; margin: 0 auto; padding: 16px; padding-bottom: 100px; }
+
+        /* 头部 */
+        .app-header {
+            text-align: center;
+            padding: 28px 0 20px;
+        }
+        .app-logo { font-size: 36px; margin-bottom: 8px; }
+        .app-title { font-size: 20px; font-weight: 700; letter-spacing: 1px; opacity: 0.95; }
+        .app-subtitle { font-size: 12px; opacity: 0.7; margin-top: 4px; }
+
+        /* 卡片 */
+        .card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 平台选择 */
+        .platform-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .platform-chip {
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .platform-chip.active {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
+            color: #fff;
+            font-weight: 600;
+        }
+        .platform-chip:hover:not(.active) { background: rgba(255,255,255,0.15); }
+
+        /* 搜索框 */
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+        .search-input {
+            flex: 1;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0 14px;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+        .search-input::placeholder { color: rgba(255,255,255,0.5); }
+        .search-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.15); }
+        .search-btn {
+            height: 42px;
+            padding: 0 20px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            color: #764ba2;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .search-btn:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .search-btn:active { transform: scale(0.98); }
+
+        /* 搜索结果 */
+        .song-list { list-style: none; }
+        .song-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.15s;
+            gap: 12px;
+        }
+        .song-item:hover { background: rgba(255,255,255,0.08); }
+        .song-cover {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            overflow: hidden;
+        }
+        .song-cover img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+        .song-info { flex: 1; min-width: 0; }
+        .song-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .song-author { font-size: 11.5px; opacity: 0.65; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .song-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .song-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: transparent;
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .song-action-btn.play { border-color: rgba(102,234,234,0.5); }
+        .song-action-btn.play:hover { background: rgba(102,234,234,0.2); }
+        .song-action-btn.dl { border-color: rgba(82,196,26,0.5); }
+        .song-action-btn.dl:hover { background: rgba(82,196,26,0.2); }
+        .song-action-btn.fav { border-color: rgba(255,77,77,0.5); }
+        .song-action-btn.fav:hover { background: rgba(255,77,77,0.2); }
+        .song-action-btn.fav.favorited { background: rgba(255,77,77,0.25); color: #ff4d4f; }
+
+        /* 转换区 */
+        .lock-screen { text-align: center; padding: 24px 0; }
+        .lock-icon { font-size: 40px; margin-bottom: 12px; }
+        .lock-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .lock-desc { font-size: 12.5px; opacity: 0.65; margin-bottom: 18px; line-height: 1.5; }
+        .password-input {
+            width: 100%;
+            max-width: 260px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0 14px;
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+            font-family: inherit;
+            margin-bottom: 14px;
+        }
+        .password-input::placeholder { color: rgba(255,255,255,0.45); }
+        .unlock-btn {
+            height: 40px;
+            padding: 0 28px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            color: #764ba2;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .unlock-btn:hover { transform: scale(1.02); }
+
+        .upload-zone {
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 14px;
+            padding: 36px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.06);
+        }
+        .upload-icon { font-size: 36px; margin-bottom: 8px; }
+        .upload-text { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+        .upload-hint { font-size: 11.5px; opacity: 0.55; }
+
+        .file-info-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            margin-top: 14px;
+        }
+        .file-icon { font-size: 22px; }
+        .file-name { flex: 1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .file-remove {
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,77,77,0.4);
+            background: transparent;
+            color: #ff4d4f;
+            font-size: 11.5px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .file-remove:hover { background: rgba(255,77,77,0.15); }
+
+        .convert-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+        .quality-select {
+            flex: 1;
+            min-width: 120px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0 12px;
+            font-size: 13px;
+            font-family: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+        }
+        .quality-select option { background: #333; color: #fff; }
+        .convert-start-btn, .download-result-btn {
+            height: 38px;
+            padding: 0 18px;
+            border-radius: 10px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .convert-start-btn { background: rgba(102,234,234,0.85); color: #fff; }
+        .convert-start-btn:hover { background: rgba(102,234,234,1); }
+        .convert-start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .download-result-btn { background: rgba(82,196,26,0.85); color: #fff; display: none; }
+        .download-result-btn:hover { background: rgba(82,196,26,1); }
+
+        .progress-wrap { margin-top: 16px; display: none; }
+        .progress-bar-bg {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.15);
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11.5px;
+            opacity: 0.65;
+            margin-top: 6px;
+        }
+
+        /* APlayer 容器 */
+        #aplayer-container { margin-top: 16px; border-radius: 14px; overflow: hidden; }
+
+        /* Tab 切换 */
+        .tab-bar { display: flex; gap: 0; margin-bottom: 16px; background: rgba(255,255,255,0.08); border-radius: 12px; padding: 4px; }
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255,255,255,0.65);
+        }
+        .tab-item.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 600; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* 状态提示 */
+        .empty-state { text-align: center; padding: 32px 16px; opacity: 0.6; font-size: 13.5px; }
+        .loading-state { text-align: center; padding: 32px 16px; }
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.25); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .load-more-wrap { text-align: center; padding: 18px 16px; font-size: 13px; color: rgba(255,255,255,0.6); }
+        .load-more-wrap .spinner { width: 16px; height: 16px; border-width: 2px; }
+        .load-more-tip { text-align: center; padding: 18px 16px; font-size: 12px; color: rgba(255,255,255,0.35); }
+
+        /* Toast */
+        .toast-container { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+        .toast-item {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            animation: toastIn 0.25s ease;
+            backdrop-filter: blur(8px);
+            max-width: 320px;
+            text-align: center;
+        }
+        .toast-item.success { background: rgba(82,196,26,0.88); color: #fff; }
+        .toast-item.error { background: rgba(255,77,77,0.88); color: #fff; }
+        .toast-item.info { background: rgba(102,126,255,0.88); color: #fff; }
+        @keyframes toastIn { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+        .toast-out { animation: toastOut 0.25s ease forwards; }
+        @keyframes toastOut { to{opacity:0;transform:translateY(-12px)} }
+
+        @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }
+        .shake { animation: shake 0.4s ease; border-color: #ff4d4f !important; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- 头部 -->
+    <div class="app-header">
+        <div class="app-logo">🎵</div>
+        <div class="app-title">Meting Music</div>
+        <div class="app-subtitle">多平台音乐搜索 & 格式转换</div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Tab 切换 -->
+    <div class="tab-bar">
+        <div class="tab-item active" data-tab="search" onclick="switchTab('search')">🔍 搜索</div>
+        <div class="tab-item" data-tab="converter" onclick="switchTab('converter')">🔄 转换</div>
+    </div>
+
+    <!-- 搜索面板 -->
+    <div class="tab-panel active" id="panel-search">
+        <div class="card">
+            <div class="card-title">🎵 平台选择</div>
+            <div class="platform-chips" id="platformChips">
+                <button class="platform-chip active" data-server="netease">网易云</button>
+                <button class="platform-chip" data-server="tencent">QQ音乐</button>
+                <button class="platform-chip" data-server="kugou">酷狗音乐</button>
+                <button class="platform-chip" data-server="baidu">百度音乐</button>
+                <button class="platform-chip" data-server="kuwo">酷我音乐</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🔍 搜索音乐</div>
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="输入歌曲名或歌手名...">
+                <button class="search-btn" id="searchBtn" onclick="doSearch()">搜索</button>
+            </div>
+        </div>
+
+        <div id="searchResultArea">
+            <div class="loading-state" id="searchLoading" style="display:none"><span class="spinner"></span>搜索中...</div>
+            <div class="empty-state" id="searchEmpty" style="display:none">暂无结果</div>
+            <ul class="song-list" id="songList"></ul>
+            <div class="load-more-wrap" id="loadMoreWrap" style="display:none"><span class="spinner"></span>正在加载更多...</div>
+            <div class="load-more-tip" id="loadMoreTip" style="display:none">— 已经到底了 —</div>
+        </div>
+
+        <div id="aplayer-container"></div>
+    </div>
+
+    <!-- 格式转换面板 -->
+    <div class="tab-panel" id="panel-converter">
+        <div class="card" id="lockOverlay">
+            <div class="lock-screen">
+                <div class="lock-icon">🔐</div>
+                <div class="lock-title">功能已锁定</div>
+                <div class="lock-desc">MP4 转 MP3 功能需要输入密码才能使用</div>
+                <input type="password" class="password-input" id="pwdInput" placeholder="请输入访问密码...">
+                <button class="unlock-btn" id="unlockBtn" onclick="attemptUnlock()">解锁功能</button>
+            </div>
+        </div>
+
+        <div class="card" id="converterUnlocked" style="display:none">
+            <div class="card-title">📁 上传视频文件</div>
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">点击或拖拽上传视频文件</div>
+                <div class="upload-hint">支持 MP4/MOV/AVI/MKV，建议 ≤50MB</div>
+                <input type="file" id="fileInput" accept="video/*" style="display:none">
+            </div>
+            <div class="file-info-bar" id="fileInfoBar" style="display:none">
+                <span class="file-icon">🎬</span>
+                <span class="file-name" id="fileName"></span>
+                <button class="file-remove" id="removeFileBtn" onclick="removeFile()">移除</button>
+            </div>
+            <div class="convert-options" id="convertOptions" style="display:none">
+                <select class="quality-select" id="qualitySelect">
+                    <option value="128">128 kbps</option>
+                    <option value="192" selected>192 kbps</option>
+                    <option value="320">320 kbps</option>
+                </select>
+                <button class="convert-start-btn" id="startConvertBtn" onclick="startConvert()">开始转换</button>
+                <button class="download-result-btn" id="downloadResultBtn" onclick="downloadResult()">下载 MP3</button>
+            </div>
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+                <div class="progress-text"><span id="progressPercent">0%</span><span id="progressStatus">准备中</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script>
+var API_BASE = 'https://ce.guokeil.cn';
+var currentServer = 'netease';
+var ap = null;
+
+/* ====== Toast ====== */
+function showToast(msg, type) {
+    type = type || 'info';
+    var container = document.getElementById('toastContainer');
+    var el = document.createElement('div');
+    el.className = 'toast-item ' + type;
+    el.textContent = msg;
+    container.appendChild(el);
+    setTimeout(function() { el.classList.add('toast-out'); setTimeout(function() { if(el.parentNode) el.parentNode.removeChild(el); }, 250); }, 2500);
+}
+
+/* ====== Tab 切换 ====== */
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-item').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === tabId); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.toggle('active', p.id === 'panel-' + tabId); });
+}
+
+/* ====== 搜索 ====== */
+document.getElementById('searchInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
+window.addEventListener('scroll', handleScrollLoad, { passive: true });
+
+document.querySelectorAll('.platform-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+        document.querySelectorAll('.platform-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        currentServer = this.dataset.server;
+    });
+});
+
+var searchPage = 0;
+var searchQuery = '';
+var hasMore = true;
+var isLoadingMore = false;
+
+function doSearch() {
+    var query = document.getElementById('searchInput').value.trim();
+    if (!query) { showToast('请输入搜索关键词', 'info'); return; }
+
+    searchQuery = query;
+    searchPage = 0;
+    hasMore = true;
+    isLoadingMore = false;
+
+    var loading = document.getElementById('searchLoading');
+    var empty = document.getElementById('searchEmpty');
+    var list = document.getElementById('songList');
+    var loadMoreWrap = document.getElementById('loadMoreWrap');
+    var loadMoreTip = document.getElementById('loadMoreTip');
+
+    loading.style.display = '';
+    empty.style.display = 'none';
+    list.innerHTML = '';
+    loadMoreWrap.style.display = 'none';
+    loadMoreTip.style.display = 'none';
+
+    fetchSearchResults();
+}
+
+function fetchSearchResults() {
+    var loading = document.getElementById('searchLoading');
+    var empty = document.getElementById('searchEmpty');
+    var list = document.getElementById('songList');
+    var loadMoreWrap = document.getElementById('loadMoreWrap');
+    var loadMoreTip = document.getElementById('loadMoreTip');
+
+    if (searchPage === 0) loading.style.display = '';
+    else loadMoreWrap.style.display = '';
+
+    isLoadingMore = true;
+
+    fetch(API_BASE + '/api?server=' + currentServer + '&type=search&id=' + encodeURIComponent(searchQuery) + '&offset=' + (searchPage * 30))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            isLoadingMore = false;
+            loading.style.display = 'none';
+            loadMoreWrap.style.display = 'none';
+
+            if (!data || data.length === 0) {
+                if (searchPage === 0) empty.style.display = '';
+                else loadMoreTip.style.display = '';
+                hasMore = false;
+                return;
+            }
+
+            if (data.length < 30) hasMore = false;
+
+            var html = data.map(function(song, idx) {
+                var globalIdx = searchPage * 30 + idx;
+                var rawId = song.id || song.rid || '';
+                var safeTitle = (song.title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+                var safeAuthor = (song.author || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+                var safeUrl = (song.url || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+                var rawPic = song.pic || '';
+                var safePic = rawPic.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+                if (!rawPic && rawId) {
+                    safePic = (API_BASE + '/api?server=' + currentServer + '&type=pic&id=' + rawId).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+                }
+                var coverHtml = safePic ? '<img src="' + safePic + '" onerror="this.parentElement.innerHTML=\'🎵\'">' : '<span class="cover-placeholder">🎵</span>';
+
+                return '<li class="song-item">' +
+                    '<div class="song-cover">' + coverHtml + '</div>' +
+                    '<div class="song-info"><div class="song-name" title="' + safeTitle + '">' + safeTitle + '</div><div class="song-author">' + safeAuthor + '</div></div>' +
+                    '<div class="song-actions">' +
+                        '<button class="song-action-btn play" onclick="playSong(\'' + safeTitle + '\',\'' + safeAuthor.replace(/'/g,"\\'") + '\',\'' + safeUrl + '\',\'' + safePic + '\')">▶</button>' +
+                        '<button class="song-action-btn dl" onclick="downloadSong(\'' + safeTitle + '\',\'' + safeUrl + '\')">⬇</button>' +
+                    '</div></li>';
+            }).join('');
+
+            list.insertAdjacentHTML('beforeend', html);
+
+            if (searchPage === 0) showToast('找到 ' + data.length + ' 首歌曲', 'success');
+            else showToast('已加载 ' + (list.querySelectorAll('.song-item').length) + ' 首歌曲', 'info');
+        })
+        .catch(function(err) {
+            isLoadingMore = false;
+            loading.style.display = 'none';
+            loadMoreWrap.style.display = 'none';
+            if (searchPage === 0) { empty.style.display = ''; }
+            console.error(err);
+            showToast('搜索失败，请重试', 'error');
+        });
+}
+
+function handleScrollLoad() {
+    if (isLoadingMore || !hasMore || !searchQuery) return;
+    var list = document.getElementById('songList');
+    if (!list) return;
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var clientHeight = document.documentElement.clientHeight || window.innerHeight;
+    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    if (scrollTop + clientHeight >= scrollHeight - 200) {
+        searchPage++;
+        fetchSearchResults();
+    }
+}
+
+function computeAuthToken(server, type, id) {
+    var encoder = new TextEncoder();
+    var keyData = encoder.encode('token');
+    var msgData = encoder.encode(server + type + id);
+    return crypto.subtle.importKey('raw', keyData, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign'])
+        .then(function(key) { return crypto.subtle.sign('HMAC', key, msgData); })
+        .then(function(sig) { return Array.from(new Uint8Array(sig)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join(''); });
+}
+
+function getSongUrl(server, songId, callback) {
+    if (!songId) { showToast('歌曲ID缺失', 'error'); callback('', ''); return; }
+    computeAuthToken(server, 'url', songId).then(function(authToken) {
+        var url = API_BASE + '/api?server=' + server + '&type=url&id=' + songId + '&auth=' + authToken;
+        callback(url, '');
+    })["catch"](function() { showToast('生成播放链接失败', 'error'); callback('', ''); });
+}
+
+function playSong(title, author, url, pic) {
+    if (!url) { showToast('无法播放：无有效链接', 'error'); return; }
+    if (!ap) {
+        ap = new APlayer({
+            container: document.getElementById('aplayer-container'),
+            fixed: true,
+            lrcType: 3,
+            audio: [{ name: title, artist: author, url: url, cover: pic, theme: '#764ba2' }],
+            volume: 0.8,
+            autoplay: true
+        });
+    } else {
+        ap.list.add([{ name: title, artist: author, url: url, cover: pic, theme: '#764ba2' }]);
+        ap.list.switch(ap.list.audios.length - 1);
+        ap.play();
+    }
+    showToast('正在播放: ' + title, 'success');
+}
+
+function downloadSong(title, url) {
+    if (!url) { showToast('无法下载：无有效链接', 'error'); return; }
+    showToast('正在准备下载...', 'info');
+    fetch(url)
+        .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.blob();
+        })
+        .then(function(blob) {
+            var blobUrl = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = (title || 'music') + '.mp3';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 5000);
+            showToast('开始下载: ' + title, 'success');
+        })
+        .catch(function() {
+            window.open(url, '_blank');
+            showToast('正在通过新窗口下载', 'info');
+        });
+}
+
+/* ====== 格式转换 ====== */
+var isConverterUnlocked = false;
+var selectedFile = null;
+var convertedBlob = null;
+var ffmpegInstance = null;
+var isConverting = false;
+
+function attemptUnlock() {
+    var pwd = document.getElementById('pwdInput').value.trim();
+    if (!pwd) { showToast('请输入密码', 'info'); return; }
+    
+    fetch(API_BASE + '/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data && data.sessionToken) {
+            sessionStorage.setItem('sessionToken', data.sessionToken);
+            isConverterUnlocked = true;
+            showUnlockedConverter();
+            showToast('解锁成功', 'success');
+        } else {
+            var input = document.getElementById('pwdInput');
+            input.classList.add('shake');
+            setTimeout(function() { input.classList.remove('shake'); }, 400);
+            showToast('密码错误', 'error');
+        }
+    })
+    .catch(function() {
+        showToast('验证失败，请检查网络', 'error');
+    });
+}
+
+function checkConverterAccess() {
+    var token = sessionStorage.getItem('sessionToken');
+    if (token) {
+        isConverterUnlocked = true;
+        showUnlockedConverter();
+    }
+}
+
+function showLockOverlay() {
+    document.getElementById('lockOverlay').style.display = '';
+    document.getElementById('converterUnlocked').style.display = 'none';
+}
+
+function showUnlockedConverter() {
+    document.getElementById('lockOverlay').style.display = 'none';
+    document.getElementById('converterUnlocked').style.display = '';
+}
+
+function initUploader() {
+    var zone = document.getElementById('uploadZone');
+    var input = document.getElementById('fileInput');
+    
+    zone.addEventListener('click', function() { input.click(); });
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+    zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
+    });
+    input.addEventListener('change', function() { if (this.files.length > 0) handleFileSelect(this.files[0]); });
+}
+
+function handleFileSelect(file) {
+    var LIMIT = 50 * 1024 * 1024;
+    if (!file) return;
+    if (file.size > LIMIT) { showToast('文件过大，请选择 50MB 以内的文件', 'error'); return; }
+    
+    selectedFile = file;
+    document.getElementById('fileName').textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(1) + ' MB)';
+    document.getElementById('fileInfoBar').style.display = '';
+    document.getElementById('convertOptions').style.display = '';
+}
+
+function removeFile() {
+    selectedFile = null;
+    convertedBlob = null;
+    document.getElementById('fileInfoBar').style.display = 'none';
+    document.getElementById('convertOptions').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('downloadResultBtn').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+}
+
+async function startConvert() {
+    if (!selectedFile || isConverting) return;
+    isConverting = true;
+    
+    var btn = document.getElementById('startConvertBtn');
+    btn.disabled = true;
+    btn.textContent = '转换中...';
+    
+    var quality = document.getElementById('qualitySelect').value;
+    var progressWrap = document.getElementById('progressWrap');
+    var progressFill = document.getElementById('progressFill');
+    var progressPercent = document.getElementById('progressPercent');
+    var progressStatus = document.getElementById('progressStatus');
+    
+    progressWrap.style.display = '';
+    progressFill.style.width = '0%';
+    progressPercent.textContent = '0%';
+    progressStatus.textContent = '加载引擎...';
+    
+    try {
+        await startBrowserConvert(selectedFile, quality);
+        
+        progressPercent.textContent = '100%';
+        progressStatus.textContent = '转换完成';
+        document.getElementById('downloadResultBtn').style.display = '';
+        showToast('转换完成，请下载', 'success');
+    } catch(e) {
+        progressStatus.textContent = '转换失败';
+        showToast('转换失败: ' + e.message, 'error');
+    } finally {
+        isConverting = false;
+        btn.disabled = false;
+        btn.textContent = '开始转换';
+    }
+}
+
+async function startBrowserConvert(file, quality) {
+    if (!window.FFmpeg) {
+        await loadScript('https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js');
+    }
+    
+    const { FFmpeg } = FFmpegWASM;
+    ffmpegInstance = new FFmpeg();
+    
+    await ffmpegInstance.load({
+        coreURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',
+        workerURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.worker.js',
+        log: true
+    });
+    
+    var inputName = 'input_' + Date.now() + '.' + file.name.split('.').pop();
+    var outputName = 'output_' + Date.now() + '.mp3';
+    
+    await ffmpegInstance.writeFile(inputName, new Uint8Array(await file.arrayBuffer()));
+    
+    var audioBitrate = quality + 'k';
+    
+    await ffmpegInstance.exec(['-i', inputName, '-vn', '-acodec', 'libmp3lame', '-ab', audioBitrate, '-y', outputName], {
+        onProgress: function(p) {
+            var pct = Math.round(p.ratio * 100);
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressPercent').textContent = pct + '%';
+            document.getElementById('progressStatus').textContent = p.time ? '处理中...' : '准备中...';
+        }
+    });
+    
+    var data = await ffmpegInstance.readFile(outputName);
+    convertedBlob = new Blob([data.buffer], { type: 'audio/mpeg' });
+    
+    await ffmpegInstance.deleteFile(inputName);
+    await ffmpegInstance.deleteFile(outputName);
+}
+
+function downloadResult() {
+    if (!convertedBlob) return;
+    var url = URL.createObjectURL(convertedBlob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'converted_audio.mp3';
+    a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 5000);
+}
+
+function loadScript(src) {
+    return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+    });
+}
+
+// FFmpeg Worker 预取
+(function prefetchFfmpegWorker() {
+    try {
+        var urls = [
+            'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.worker.js',
+            'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',
+            'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js'
+        ];
+        urls.forEach(function(url) {
+            fetch(url, { mode: 'no-cors' }).catch(function(){});
+        });
+    } catch(e) {}
+})();
+
+// 初始化
+checkConverterAccess();
+initUploader();
+
+document.getElementById('removeFileBtn') && document.getElementById('removeFileBtn').addEventListener('click', removeFile);
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在跳转...</title>
+</head>
+<body>
+<script>
+(function() {
+    function isMobile() {
+        if (navigator.maxTouchPoints > 1) return true;
+        if (window.matchMedia('(pointer: coarse)').matches) return true;
+        var ua = (navigator.userAgent || navigator.vendor || window.opera || '').toLowerCase();
+        if (/android|iphone|ipad|ipod|blackberry|mobile|mini|windows\sce|palm/i.test(ua)) return true;
+        if ((window.innerWidth || screen.width || 0) < 1024) return true;
+        return false;
+    }
+    window.location.replace(isMobile() ? 'mobile.html' : 'pc.html');
+})();
+</script>
+</body>
+</html>
