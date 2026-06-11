@@ -4,6 +4,8 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
+RUN mkdir -p /app/data /app/cookie
+
 COPY package.json bun.lockb* ./
 RUN bun install --production
 

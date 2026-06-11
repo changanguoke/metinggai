@@ -64,6 +64,20 @@ docker run -d \
   --name meting-api1 \
   meting-api1
 ```
+修改管理后台路径需要改两个地方：
+
+1. 后端路由 — src/index.js
+
+把 /admin 改成你想要的路径：
+
+
+JavaScript
+
+// 第128行
+if (pathname === `${config.http.prefix}/admin`) {
+2. 前端跳转链接 — 在 pc.html 和 mobile.html 中搜索 /admin，把登录后下拉菜单的管理后台链接也同步修改。
+
+
 
 使用 Docker Compose:
 

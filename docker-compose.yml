@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    image: meting-api
+    restart: always
+    ports:
+      - "3000:80"
+    volumes:
+      - ./cookie:/app/cookie
+      - app_data:/app/data
+      - ./data:/app/data
+    environment:
+      - METING_URL=https://ws.guokel.site
+      - METING_TOKEN=77U%vwSuwcnIVhcc
+      - METING_COOKIE_NETEASE=
+    networks:
+      - default
+      - billionmail-net
+
+networks:
+  billionmail-net:
+    external: true
+    name: billionmail_billionmail-network
+
+volumes:
+  app_data:

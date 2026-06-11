@@ -48,7 +48,7 @@
 
         a { text-decoration: none; color: inherit; }
 
-        /* ===== 顶部导航栏 ===== */
+        /* ========== 顶部导航栏 ========== */
         .topbar {
             position: fixed;
             top: 0;
@@ -126,7 +126,7 @@
 
         .topbar-link:hover { color: var(--color-topbar-text); }
 
-        /* ===== 左侧边栏 ===== */
+        /* ========== 左侧边栏 ========== */
         .sidebar {
             position: fixed;
             top: var(--header-height);
@@ -173,7 +173,7 @@
             flex-shrink: 0;
         }
 
-        /* ===== 副导航 Tab 栏 ===== */
+        /* ========== 副导航 Tab 栏 ========== */
         .sub-nav {
             position: fixed;
             top: var(--header-height);
@@ -209,7 +209,7 @@
             border-bottom-color: var(--color-primary);
         }
 
-        /* ===== 主内容区 ===== */
+        /* ========== 主内容区 ========== */
         .main-content {
             position: fixed;
             top: calc(var(--header-height) + 44px);
@@ -235,7 +235,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== 底部播放栏 ===== */
+        /* ========== 底部播放栏 ========== */
         .player-bar {
             position: fixed;
             bottom: 0;
@@ -461,7 +461,7 @@
             cursor: pointer;
         }
 
-        /* ===== 滚动条美化 ===== */
+        /* ========== 滚动条美化 ========== */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
@@ -470,7 +470,7 @@
         .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
         .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-        /* ===== 搜索模块 - 平台选择芯片栏 ===== */
+        /* ========== 搜索模块 - 平台选择芯片栏 ========== */
         .search-chip-bar {
             display: flex;
             gap: 10px;
@@ -503,7 +503,7 @@
             box-shadow: 0 2px 8px rgba(22,119,255,0.3);
         }
 
-        /* ===== 搜索模块 - 输入区 ===== */
+        /* ========== 搜索模块 - 输入区 ========== */
         .search-input-card {
             display: flex;
             gap: 12px;
@@ -546,7 +546,7 @@
 
         .search-btn:hover { background: var(--color-primary-light); }
 
-        /* ===== 搜索模块 - 结果类型 Tab ===== */
+        /* ========== 搜索模块 - 结果类型 Tab ========== */
         .result-type-tabs {
             display: flex;
             gap: 28px;
@@ -583,7 +583,7 @@
             border-radius: 1px;
         }
 
-        /* ===== 搜索模块 - 结果区域 ===== */
+        /* ========== 搜索模块 - 结果区域 ========== */
         .search-result-area {
             min-height: 300px;
         }
@@ -695,7 +695,7 @@
         }
         .action-btn-fav.favorited { animation: heartBeat 0.6s ease; }
 
-        /* ===== 我的收藏面板 ===== */
+        /* ========== 我的收藏面板 ========== */
         .favorites-panel {
             background: var(--color-card-bg);
             border-radius: 8px;
@@ -801,7 +801,7 @@
         .fav-empty-state .icon { font-size: 48px; opacity: 0.5; }
         .fav-empty-state .text { font-size: 14px; color: var(--color-text-secondary); }
 
-        /* ===== 搜索模块 - Loading 状态 ===== */
+        /* ========== 搜索模块 - Loading 状态 ========== */
         .search-loading {
             display: flex;
             flex-direction: column;
@@ -826,7 +826,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ===== 搜索模块 - 空/错误状态 ===== */
+        /* ========== 搜索模块 - 空/错误状态 ========== */
         .search-empty {
             display: flex;
             flex-direction: column;
@@ -855,7 +855,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .load-more-end { text-align: center; padding: 16px; font-size: 12px; color: var(--color-text-tertiary); }
 
-        /* ===== Toast 提示组件 ===== */
+        /* ========== Toast 提示组件 ========== */
         .toast-container {
             position: fixed;
             top: calc(var(--header-height) + 12px);
@@ -895,7 +895,7 @@
             to { opacity: 0; transform: translateY(-12px); }
         }
 
-        /* ===== 格式转换模块 (PC版) ===== */
+        /* ========== 格式转换模块 (PC版) ========== */
         .converter-card {
             background: var(--color-card-bg);
             border-radius: 8px;
@@ -909,29 +909,9 @@
         .lock-title { font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
         .lock-desc { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 24px; line-height: 1.5; }
         .lock-desc small { color: var(--color-border); display: block; margin-top: 4px; }
-        .password-input {
-            display: block;
-            width: 280px;
-            height: 42px;
-            margin: 0 auto;
-            padding: 0 16px;
-            border-radius: 8px;
-            border: 1.5px solid var(--color-border);
-            background: var(--color-input-bg);
-            color: var(--color-text-primary);
-            font-size: 14px;
-            outline: none;
-            text-align: center;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-        .password-input::placeholder { color: #bbb; }
-        .password-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(22,119,255,0.1); }
-        .password-input.error { animation: shake 0.4s ease-in-out; border-color: #ff4d4f; }
-        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
         .unlock-btn {
             display: block;
-            width: 120px;
+            width: 180px;
             height: 40px;
             margin: 20px auto 0;
             border-radius: 8px;
@@ -945,7 +925,6 @@
             transition: all 0.2s ease;
         }
         .unlock-btn:hover { background: var(--color-primary-light); transform: translateY(-1px); box-shadow: 0 4px 12px var(--color-primary-glow); }
-        .unlock-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
         .converter-unlocked { display: none; }
         .converter-unlocked.visible { display: block; }
@@ -1052,11 +1031,11 @@
             transition: width 0.3s ease;
         }
 
-        /* ===== 隐藏 APlayer 默认 UI ===== */
+        /* ========== 隐藏 APlayer 默认 UI ========== */
         #aplayerEngine { display: none !important; }
         .aplayer { display: none !important; }
 
-        /* ===== 进度条拖拽优化 ===== */
+        /* ========== 进度条拖拽优化 ========== */
         .player-progress-bar { user-select: none; }
         .player-progress-thumb {
             width: 12px;
@@ -1069,7 +1048,7 @@
         .player-btn-prev, .player-btn-next { font-size: 18px; }
         .player-btn.play-pause { font-size: 18px; }
 
-        /* ===== 播放历史面板 ===== */
+        /* ========== 播放历史面板 ========== */
     .history-panel {
         background: var(--color-card-bg);
         border-radius: 8px;
@@ -1239,7 +1218,7 @@
         color: var(--color-text-secondary);
     }
 
-        /* ===== 歌词面板 ===== */
+        /* ========== 歌词面板 ========== */
         .lyrics-overlay {
             position: fixed;
             top: 0;
@@ -1386,7 +1365,7 @@
             margin: 0 auto 12px;
         }
 
-        /* ===== 播放列表面板 ===== */
+        /* ========== 播放列表面板 ========== */
         .playlist-overlay {
             position: fixed;
             top: 0;
@@ -1519,7 +1498,7 @@
             white-space: nowrap;
         }
 
-        /* ===== 大屏模式下播放列表暗色适配 ===== */
+        /* ========== 大屏模式下播放列表暗色适配 ========== */
         .playlist-overlay.bs-dark .playlist-panel {
             background: rgba(20, 20, 30, 0.96);
             box-shadow: -4px 0 30px rgba(0, 0, 0, 0.5);
@@ -1567,7 +1546,7 @@
             background: rgba(255,255,255,0.15);
         }
 
-        /* ===== 首页欢迎面板 ===== */
+        /* ========== 首页欢迎面板 ========== */
         .welcome-card {
             background: var(--color-card-bg);
             border-radius: 8px;
@@ -1643,7 +1622,7 @@
             .welcome-card { padding: 32px 24px; margin: 30px auto; }
         }
 
-        /* ====== 歌单面板样式 ====== */
+        /* ========== 歌单面板样式 ========== */
         .playlist-category-tags { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .pl-tag { padding: 6px 18px; border-radius: 16px; font-size: 13px; cursor: pointer; background: var(--color-card-bg); border: 1px solid var(--color-border); color: var(--color-text-secondary); transition: all 0.2s; }
         .pl-tag.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
@@ -1690,7 +1669,7 @@
             .playlist-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* ====== 排行榜面板样式 ====== */
+        /* ========== 排行榜面板样式 ========== */
 .rank-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .rank-header h2 { font-size: 18px; font-weight: 700; }
 .rank-platform-chips { display: flex; gap: 8px; }
@@ -1730,7 +1709,7 @@
 
 .rank-loading, .rank-empty { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 60px 20px; color: var(--color-text-secondary); font-size: 14px; background: var(--color-card-bg); border-radius: 10px; }
 
-        /* ====== 电台面板样式 ====== */
+        /* ========== 电台面板样式 ========== */
         .radio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
         .radio-station-card { border-radius: 14px; padding: 28px 20px; cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 8px rgba(0,0,0,0.08); color: #fff; text-align: center; }
         .radio-station-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
@@ -1763,7 +1742,7 @@
             .radio-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-/* ====== 首页样式 ====== */
+/* ========== 首页样式 ========== */
 .home-loading { padding: 20px; }
 .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
 @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
@@ -1827,7 +1806,7 @@
     .quick-entry-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ====== 设置面板 ====== */
+/* ========== 设置面板 ========== */
 .settings-overlay {
     display: none;
     position: fixed;
@@ -1981,7 +1960,7 @@
 .shortcut-key-btn.recording { border-color: var(--color-primary); background: #e6f4ff; box-shadow: 0 0 0 2px rgba(22,119,255,0.15); }
 .shortcut-key-btn .hint { font-size: 10px; color: #bbb; }
 
-/* ====== 大屏模式（左封右词） ====== */
+/* ========== 大屏模式（左封右词） ========== */
 .bigscreen-overlay { position: fixed; inset: 0; z-index: 9999; display: none; background: #0a0a12; }
 .bigscreen-bg {
     position: absolute; inset: 0;
@@ -2162,7 +2141,7 @@
     border-radius: 50%; background: #fff; cursor: pointer;
 }
 
-/* ===== 播放模式弹窗 ===== */
+/* ========== 播放模式弹窗 ========== */
 .bs-playmode-popup {
     display: none; position: fixed;
     min-width: 160px; padding: 6px 0;
@@ -2185,7 +2164,7 @@
 .bs-pm-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
 .bs-pm-label { white-space: nowrap; }
 
-/* ===== 相关视图 ===== */
+/* ========== 相关视图 ========== */
 .bs-view { width: 100%; height: 100%; }
 .bs-view.hidden { display: none !important; }
 .bs-lyrics-view { display: flex; }
@@ -2299,7 +2278,7 @@
 }
 .bs-rel-action-btn:hover { color: #fff; background: rgba(255,255,255,0.12); }
 
-/* ====== 沉浸式模式 ====== */
+/* ========== 沉浸式模式 ========== */
 .immersive-overlay {
     position: fixed; inset: 0; z-index: 99999;
     display: none;
@@ -2391,6 +2370,82 @@
     .bs-btm-left, .bs-btm-right { width: auto; justify-content: center; min-width: auto; }
     .bs-volume-control { display: none; }
 }
+
+    /* ========== 登录/注册弹窗 ========== */
+    .auth-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 10000;
+        display: none; align-items: center; justify-content: center;
+    }
+    .auth-overlay.show { display: flex; }
+    .auth-modal {
+        background: #fff; border-radius: 16px; width: 400px; max-width: 92vw;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden;
+    }
+    .auth-header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed); padding: 24px 28px; color: #fff;
+    }
+    .auth-header h2 { font-size: 18px; font-weight: 600; margin: 0; }
+    .auth-header p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+    .auth-body { padding: 28px; }
+    .auth-tabs { display: flex; gap: 0; margin-bottom: 20px; background: #f3f4f6; border-radius: 10px; padding: 3px; }
+    .auth-tab {
+        flex: 1; text-align: center; padding: 8px 0; border-radius: 8px; font-size: 13px;
+        cursor: pointer; transition: all 0.2s; color: #666; font-weight: 500;
+    }
+    .auth-tab.active { background: #fff; color: #4f46e5; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .auth-login-tabs { display: flex; gap: 0; margin-bottom: 16px; background: #f3f4f6; border-radius: 8px; padding: 2px; }
+    .auth-login-tab {
+        flex: 1; text-align: center; padding: 6px 0; border-radius: 6px; font-size: 12px;
+        cursor: pointer; transition: all 0.2s; color: #666; font-weight: 500;
+    }
+    .auth-login-tab.active { background: #fff; color: #4f46e5; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+    .auth-field { margin-bottom: 16px; }
+    .auth-field label { display: block; font-size: 13px; color: #374151; margin-bottom: 6px; font-weight: 500; }
+    .auth-field input {
+        width: 100%; height: 40px; border: 1px solid #d1d5db; border-radius: 10px;
+        padding: 0 14px; font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .auth-field input:focus { border-color: #4f46e5; }
+    .auth-field-row { display: flex; gap: 10px; }
+    .auth-field-row input { flex: 1; }
+    .auth-code-btn {
+        height: 40px; padding: 0 16px; border: 1px solid #4f46e5; border-radius: 10px;
+        background: #fff; color: #4f46e5; font-size: 13px; cursor: pointer; white-space: nowrap;
+        transition: all 0.2s;
+    }
+    .auth-code-btn:hover { background: #4f46e5; color: #fff; }
+    .auth-code-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .auth-submit {
+        width: 100%; height: 42px; border: none; border-radius: 10px;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff;
+        font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+    }
+    .auth-submit:hover { opacity: 0.9; }
+    .auth-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .auth-close {
+        position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.2);
+        border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%;
+        font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .auth-close:hover { background: rgba(255,255,255,0.3); }
+    .auth-msg { font-size: 12px; margin-top: 4px; min-height: 16px; }
+    .auth-msg.error { color: #ef4444; }
+    .auth-msg.success { color: #10b981; }
+    /* 用户下拉菜单 */
+    .user-dropdown {
+        position: absolute; top: 100%; right: 0; margin-top: 8px; background: #fff;
+        border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 160px;
+        display: none; z-index: 1001; overflow: hidden;
+    }
+    .user-dropdown.show { display: block; }
+    .user-dropdown-item {
+        padding: 10px 16px; font-size: 13px; color: #333; cursor: pointer; transition: background 0.15s;
+    }
+    .user-dropdown-item:hover { background: #f3f4f6; }
+    .user-dropdown-item.danger { color: #ef4444; }
+    .topbar-right { position: relative; }
     </style>
 </head>
 <body>
@@ -2406,6 +2461,12 @@
     <div class="topbar-right">
         <span class="topbar-link" id="settingsTrigger">设置</span>
         <span class="topbar-link">关于</span>
+        <span class="topbar-link" id="userTrigger" style="display:flex;align-items:center;gap:6px;">👤 <span id="userLabel">登录</span></span>
+        <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-item" id="dropdownUsername" style="font-weight:600;color:#4f46e5;"></div>
+            <div class="user-dropdown-item" id="adminLink" onclick="location.href='/admin'">管理后台</div>
+            <div class="user-dropdown-item danger" onclick="doLogout()">退出登录</div>
+        </div>
     </div>
 </header>
 
@@ -2467,6 +2528,7 @@
             <div class="home-section">
                 <div class="section-header">
                     <h3 class="section-title">🔥 热门推荐</h3>
+                    <a class="section-more" onclick="refreshHotRecommend()">换一批</a>
                 </div>
                 <div class="hot-grid" id="hotGrid">
                     <!-- 动态渲染 6-8 张歌曲卡片 -->
@@ -2484,7 +2546,18 @@
                 </div>
             </div>
 
-            <!-- 模块3: 快捷入口 -->
+            <!-- 模块3: 新歌速递 -->
+            <div class="home-section">
+                <div class="section-header">
+                    <h3 class="section-title">🎶 新歌速递</h3>
+                    <a class="section-more" onclick="refreshNewSongs()">换一批</a>
+                </div>
+                <div class="rank-preview-grid" id="newSongsGrid">
+                    <!-- 动态渲染 -->
+                </div>
+            </div>
+
+            <!-- 模块4: 快捷入口 -->
             <div class="home-section">
                 <div class="section-header">
                     <h3 class="section-title">⚡ 快捷入口</h3>
@@ -2521,11 +2594,8 @@
     <!-- 搜索面板 -->
     <section class="panel" id="panel-search">
         <div class="search-chip-bar">
-            <button class="search-chip active" data-server="netease">网易云</button>
-            <button class="search-chip" data-server="tencent">QQ音乐</button>
+            <button class="search-chip" data-server="netease">网易云</button>
             <button class="search-chip" data-server="kugou">酷狗音乐</button>
-            <button class="search-chip" data-server="baidu">百度音乐</button>
-            <button class="search-chip" data-server="kuwo">酷我音乐</button>
         </div>
 
         <div class="search-input-card">
@@ -2576,9 +2646,8 @@
         <div class="converter-card lock-overlay" id="lockOverlay">
             <div class="lock-icon">🔐</div>
             <div class="lock-title">功能已锁定</div>
-            <div class="lock-desc">MP4 转 MP3 功能需要输入密码才能使用<br><small>关闭浏览器标签页后需重新验证</small></div>
-            <input type="password" class="password-input" id="passwordInput" placeholder="请输入访问密码...">
-            <button class="unlock-btn" id="unlockBtn">解锁功能</button>
+            <div class="lock-desc">格式转换功能仅限管理员使用<br><small>请先登录管理员账号</small></div>
+            <button class="unlock-btn" id="unlockBtn" onclick="attemptAdminUnlock()">登录管理员账号</button>
         </div>
         <div class="converter-card converter-unlocked" id="converterUnlocked">
             <div class="upload-zone" id="uploadZone">
@@ -2649,11 +2718,8 @@
         <div class="rank-header">
             <h2>🏆 排行榜</h2>
             <div class="rank-platform-chips">
-                <button class="rank-chip active" data-server="netease">网易云</button>
-                <button class="rank-chip" data-server="tencent">QQ音乐</button>
+                <button class="rank-chip" data-server="netease">网易云</button>
                 <button class="rank-chip" data-server="kugou">酷狗音乐</button>
-                <button class="rank-chip" data-server="baidu">百度音乐</button>
-                <button class="rank-chip" data-server="kuwo">酷我音乐</button>
             </div>
         </div>
         <div class="rank-type-bar">
@@ -2902,8 +2968,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script src="https://registry.npmmirror.com/@ffmpeg/ffmpeg@0.12.10/files/dist/umd/ffmpeg.js" onerror="this.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js'"></script>
-<script src="https://registry.npmmirror.com/@ffmpeg/util@0.12.1/files/dist/umd/util.js" onerror="this.src='https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/util.js'"></script>
+<script src="/static/ffmpeg/ffmpeg.js"></script>
 <!-- 播放列表面板 -->
 <div class="playlist-overlay" id="playlistOverlay" style="display:none">
     <div class="playlist-backdrop" onclick="togglePlaylist()"></div>
@@ -2928,8 +2993,21 @@
 </div>
 
 <script>
-const API_BASE = 'https://ce.guokeil.cn';
+/* ================================================================
+ *  1. 全局配置与常量
+ * ================================================================ */
+const API_BASE = window.location.origin;
 
+// 安装状态检测：请求任意 API，若返回"请先完成系统安装"则跳转安装页
+fetch(API_BASE + '/api/auth/me').then(r => r.json()).then(data => {
+    if (data.message && data.message.includes('安装')) {
+        window.location.href = '/install';
+    }
+}).catch(() => {});
+
+/* ================================================================
+ *  2. 导航与路由系统
+ * ================================================================ */
 /* ===== 全局配置与导航系统 ===== */
 document.querySelectorAll('.sidebar-nav-item').forEach(item => {
     item.addEventListener('click', () => switchPanel(item.dataset.panel));
@@ -2975,7 +3053,12 @@ document.getElementById('globalSearchInput').addEventListener('keypress', functi
     }
 });
 
-/* ===== 收藏模块 ===== */
+/* ================================================================
+ *  3. 工具函数
+ * ================================================================ */
+/* ================================================================
+ *  4. 收藏模块 (Favorites)
+ * ================================================================ */
 const FAVORITES_KEY = 'meting_favorites';
 
 function getFavorites() {
@@ -2998,9 +3081,25 @@ function toggleFavorite(song) {
     if (idx >= 0) {
         list.splice(idx, 1);
         showToast('已取消收藏', 'info');
+        if (isLoggedIn()) {
+            authFetch(API_BASE + '/api/user/favorites', { method: 'GET' })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.favorites) {
+                        var match = data.favorites.find(function(f) { return f.songId === String(song.id) && f.server === (song.server || 'netease'); });
+                        if (match) authFetch(API_BASE + '/api/user/favorites/' + match.id, { method: 'DELETE' }).catch(function(){});
+                    }
+                }).catch(function(){});
+        }
     } else {
         list.unshift(song);
         showToast('已添加到收藏', 'success');
+        if (isLoggedIn()) {
+            authFetch(API_BASE + '/api/user/favorites', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ server: song.server || 'netease', songId: String(song.id), songName: song.title, artist: song.author, album: song.album || '' })
+            }).catch(function(){});
+        }
     }
     saveFavorites(list);
     return idx < 0;
@@ -3065,7 +3164,9 @@ function renderFavorites() {
     });
 }
 
-/* ===== 搜索模块 ===== */
+/* ================================================================
+ *  5. 搜索模块 (Search)
+ * ================================================================ */
 let currentServer = 'netease';
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
@@ -3195,7 +3296,7 @@ function displayResults(songs, server, startIndex) {
                 '<div class="action-btn-group">' +
                     '<button class="action-btn action-btn-play" data-url="' + songUrl + '" data-title="' + (song.title || song.name || '') + '" data-artist="' + (song.author || song.artist || '') + '" data-id="' + songId + '" data-server="' + server + '" data-pic="' + (songPic || '') + '" data-lrc="' + (song.lrc || '') + '" data-album="' + (song.album || '') + '">▶ 播放</button>' +
                     '<button class="action-btn action-btn-dl" data-url="' + songUrl + '" data-title="' + (song.title || song.name || '') + '">⬇ 下载</button>' +
-                    '<button class="action-btn action-btn-fav' + (faved ? ' favoritized' : '') + '" data-id="' + songId + '" data-title="' + (song.title || song.name || '') + '" data-artist="' + (song.author || song.artist || '') + '" data-server="' + server + '">' + (faved ? '❤' : '♡') + '</button>' +
+                    '<button class="action-btn action-btn-fav' + (faved ? ' favorited' : '') + '" data-id="' + songId + '" data-title="' + (song.title || song.name || '') + '" data-artist="' + (song.author || song.artist || '') + '" data-server="' + server + '">' + (faved ? '❤' : '♡') + '</button>' +
                 '</div>' +
             '</td>';
         searchResultBody.appendChild(tr);
@@ -3305,7 +3406,9 @@ if (mainContentEl) mainContentEl.addEventListener('scroll', handleScrollLoad, { 
 
 showSearchState('empty');
 
-/* ===== APlayer 播放器引擎 ===== */
+/* ================================================================
+ *  6. APlayer 播放器引擎
+ * ================================================================ */
 let currentPlayer = null;
 let currentPlaylist = [];
 let currentIndex = -1;
@@ -3600,7 +3703,9 @@ function downloadSong(title, url) {
         });
 }
 
-/* ===== 播放历史模块 ===== */
+/* ================================================================
+ *  7. 播放历史模块 (History)
+ * ================================================================ */
 const HISTORY_KEY = 'meting_play_history';
 const MAX_HISTORY = 50;
 
@@ -3746,14 +3851,16 @@ if (typeof APlayer !== 'undefined') {
     console.warn('[player] APlayer 未加载，播放功能不可用');
 }
 
-// ====== 格式转换模块 ======
+/* ================================================================
+ *  9. 格式转换模块 (Converter)
+ * ================================================================ */
+// ============ 格式转换模块 ============
 const FILE_SIZE_LIMIT = 50 * 1024 * 1024;
 let isConverterUnlocked = false;
 let selectedFile = null;
 let convertedBlob = null;
 let ffmpegInstance = null;
 let isConverting = false;
-let _ffmpegWorkerBlobURL = null;
 
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
@@ -3761,72 +3868,21 @@ function formatFileSize(bytes) {
     return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-
-(async function prefetchFfmpegWorker() {
-    const candidates = [
-        'https://registry.npmmirror.com/@ffmpeg/ffmpeg/0.12.10/files/dist/umd/ffmpeg.js',
-        'https://registry.npmmirror.com/@ffmpeg/core/0.12.6/files/dist/umd/ffmpeg-core.js',
-        'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/814.ffmpeg.js',
-        'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js',
-        'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',
-        'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/esm/ffmpeg.js',
-        'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js',
-        'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',
-    ];
-    for (const u of candidates) {
-        try {
-            const resp = await fetch(u);
-            if (resp.ok) {
-                const text = await resp.text();
-                if (text.includes('Worker') || text.includes('worker') || text.includes('postMessage') || text.length > 500) {
-                    _ffmpegWorkerBlobURL = URL.createObjectURL(new Blob([text], { type: 'application/javascript' }));
-                    console.log('[FFmpeg] Worker 预取成功:', u);
-                    return;
-                }
-            }
-        } catch(e) {}
-    }
-    console.warn('[FFmpeg] Worker 预取失败，将尝试内联方案');
-})();
-
-async function attemptUnlock() {
-    const input = document.getElementById('passwordInput');
-    const password = input.value.trim();
-    if (!password) {
-        input.classList.add('error');
-        setTimeout(() => input.classList.remove('error'), 400);
-        showToast('请输入密码'); return;
-    }
-    const btn = document.getElementById('unlockBtn');
-    btn.disabled = true; btn.textContent = '验证中...';
+function checkConverterAccess() {
+    const jwtToken = localStorage.getItem('auth_token');
+    if (!jwtToken) { showLockOverlay(); return; }
     try {
-        const res = await fetch(`${API_BASE}/api/verify`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password })
-        });
-        const data = await res.json();
-        if (data.success) {
-            sessionStorage.setItem('sessionToken', data.sessionToken);
+        const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+        if (payload.role === 'admin' || payload.role === 'super_admin') {
             isConverterUnlocked = true;
             showUnlockedConverter();
-            showToast('解锁成功！');
         } else {
-            input.classList.add('error');
-            setTimeout(() => input.classList.remove('error'), 400);
-            input.value = '';
-            input.placeholder = (data.message || '密码错误') + '，请重试...';
-            showToast(data.message || '密码错误');
+            showLockOverlay();
         }
     } catch(e) {
-        console.error('验证失败:', e);
-        showToast('网络错误，请检查连接');
-    } finally {
-        btn.disabled = false; btn.textContent = '解锁功能';
+        showLockOverlay();
     }
 }
-
-function checkConverterAccess() { showLockOverlay(); }
 
 function showLockOverlay() {
     document.getElementById('lockOverlay').style.display = '';
@@ -3891,36 +3947,17 @@ async function startBrowserConvert(file, quality) {
         if (!ffmpegInstance) {
             statusEl.textContent = '加载转换引擎...'; percentEl.textContent = '0%'; fillEl.style.width = '0%';
 
-            let FFmpegClass = null;
-            if (typeof FFmpeg === 'function') { FFmpegClass = FFmpeg; }
-            else if (FFmpegWASM && typeof FFmpegWASM.FFmpeg === 'function') { FFmpegClass = FFmpegWASM.FFmpeg; }
-            else if (FFmpegWASM && FFmpegWASM.FFmpeg && typeof FFmpegWASM.FFmpeg.default === 'function') { FFmpegClass = FFmpegWASM.FFmpeg.default; }
-            else if (FFmpegWASM && typeof FFmpegWASM.default === 'function') { FFmpegClass = FFmpegWASM.default; }
-            else if (typeof FFmpeg === 'object' && FFmpeg !== null && typeof FFmpeg.default === 'function') { FFmpegClass = FFmpeg.default; }
-
+            const FFmpegClass = FFmpegWASM?.FFmpeg || window.FFmpeg;
             if (!FFmpegClass) {
                 throw new Error('ffmpeg.wasm 库未正确加载，请检查网络后刷新页面重试');
             }
 
-            const coreURL = 'https://registry.npmmirror.com/@ffmpeg/core/0.12.6/files/dist/umd/ffmpeg-core.js';
+            // 多线程版本，配合服务器 COOP/COEP 头使用 SharedArrayBuffer
+            const coreURL = '/static/ffmpeg/ffmpeg-core.js';
+
             ffmpegInstance = new FFmpegClass();
             ffmpegInstance.on('log', ({ message }) => { console.log('[FFmpeg]', message); });
-
-            const OrigWorker = window.Worker;
-            window.Worker = function(url) {
-                const urlStr = String(url || '');
-                if (urlStr.startsWith('http://') || urlStr.startsWith('https://')) {
-                    console.log('[FFmpeg] Worker 拦截:', urlStr, '-> blob URL');
-                    return new OrigWorker(_ffmpegWorkerBlobURL || urlStr);
-                }
-                return new OrigWorker(url, arguments[1]);
-            };
-
-            try {
-                await ffmpegInstance.load({ coreURL: coreURL });
-            } finally {
-                window.Worker = OrigWorker;
-            }
+            await ffmpegInstance.load({ coreURL });
         }
         statusEl.textContent = '写入文件...'; percentEl.textContent = '10%'; fillEl.style.width = '10%';
         const inputName = 'input_' + Date.now() + (file.name.includes('.') ? '.' + file.name.split('.').pop() : '.mp4');
@@ -3969,13 +4006,13 @@ function downloadResult() {
 }
 
 async function getSignedToken(server, type, id) {
-    const sessionToken = sessionStorage.getItem('sessionToken');
-    if (!sessionToken) { showToast('请先解锁功能'); return ''; }
+    const jwtToken = localStorage.getItem('auth_token');
+    if (!jwtToken) { showToast('请先登录管理员账号'); return ''; }
     try {
         const res = await fetch(`${API_BASE}/api/sign?server=${server}&type=${type}&id=${encodeURIComponent(id)}`, {
-            headers: { 'X-Session-Token': sessionToken }
+            headers: { 'Authorization': 'Bearer ' + jwtToken }
         });
-        if (!res.ok) { showToast('签名获取失败，请重新登录'); return ''; }
+        if (!res.ok) { showToast('签名获取失败，请确认管理员权限'); return ''; }
         const data = await res.json();
         return data.token;
     } catch(e) {
@@ -3985,22 +4022,37 @@ async function getSignedToken(server, type, id) {
     }
 }
 
+function attemptAdminUnlock() {
+    const jwtToken = localStorage.getItem('auth_token');
+    if (!jwtToken) {
+        showToast('请先登录管理员账号');
+        return;
+    }
+    // 解析 JWT 检查管理员角色
+    try {
+        const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+        if (payload.role === 'admin' || payload.role === 'super_admin') {
+            isConverterUnlocked = true;
+            showUnlockedConverter();
+            showToast('管理员验证成功');
+        } else {
+            showToast('权限不足，需要管理员账号');
+        }
+    } catch(e) {
+        showToast('登录状态异常，请重新登录');
+    }
+}
+
 (function initConverterModule() {
-    sessionStorage.removeItem('converter_auth');
-    sessionStorage.removeItem('converter_auth_time');
     checkConverterAccess();
     initUploader();
 
-    document.getElementById('unlockBtn').addEventListener('click', attemptUnlock);
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') attemptUnlock();
-    });
     document.getElementById('removeFileBtn').addEventListener('click', removeFile);
     document.getElementById('startConvertBtn').addEventListener('click', startConvert);
     document.getElementById('downloadResultBtn').addEventListener('click', downloadResult);
 })();
 
-// ====== 歌单分类标签事件绑定 ======
+// ============ 歌单分类标签事件绑定 ============
 document.querySelectorAll('.pl-tag').forEach(function(tag) {
     tag.addEventListener('click', function() {
         document.querySelectorAll('.pl-tag').forEach(function(t) { t.classList.remove('active'); });
@@ -4010,7 +4062,7 @@ document.querySelectorAll('.pl-tag').forEach(function(tag) {
     });
 });
 
-// ====== 键盘快捷键系统 ======
+// ============ 键盘快捷键系统 ============
 function seekRelative(deltaSeconds) {
     if (!currentPlayer || !currentPlayer.audio || !currentPlayer.audio.duration) return;
     var dur = currentPlayer.audio.duration;
@@ -4046,7 +4098,7 @@ function focusSearchInput() {
     }
 }
 
-// ====== LRC 歌词解析器 ======
+// ============ LRC 歌词解析器 ============
 function parseLrc(lrcText) {
     if (!lrcText || typeof lrcText !== 'string') return [];
     var lines = lrcText.trim().split('\n');
@@ -4088,7 +4140,9 @@ function parseLrc(lrcText) {
     return result;
 }
 
-/* ===== 歌词面板功能 ===== */
+/* ================================================================
+ *  8. 歌词模块 (Lyrics)
+ * ================================================================ */
 let lyricsLines = [];
 let currentLyricIndex = -1;
 
@@ -4212,17 +4266,17 @@ function updateCurrentLyric(currentTime) {
     }
 }
 
-/* ====== HTML 转义工具函数 ====== */
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+
+/* ================================================================
+ *  10. 排行榜/歌单/电台/首页模块
+ * ================================================================ */
+/* ========== HTML 转义工具函数 ========== */
 function escapeAttr(str) {
     if (!str) return '';
     return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-/* ====== 歌单模块 ====== */
+/* ========== 歌单模块 ========== */
 var PLAYLIST_CATEGORIES = {
     'all': { keywords: ['流行歌曲', '经典老歌', '网络热歌'] },
     '华语': { keywords: ['华语流行', '华语金曲', '国语经典'] },
@@ -4252,7 +4306,7 @@ function playSongFromCard(title, author, url, pic, id, server, lrcUrl) {
     playSong(title, author, url, pic, id, server, lrcUrl);
 }
 
-/* ====== 排行榜模块 ====== */
+/* ========== 排行榜模块 ========== */
 var currentRankServer = 'netease';
 var currentRankKeyword = '热歌榜';
 
@@ -4435,7 +4489,7 @@ function closePlaylistDetail() {
     document.getElementById('plDetailOverlay').style.display = 'none';
 }
 
-/* ====== 电台模块 ====== */
+/* ========== 电台模块 ========== */
 const RADIO_STATIONS = [
     { id: 'mandarin', name: '华语金曲', icon: '🎤', desc: '经典与流行的华语音乐盛宴', gradient: 'linear-gradient(135deg,#c20c0c,#ff7875)', keyword: '华语 金曲 经典' },
     { id: 'chill', name: '轻音乐', icon: '🌊', desc: '放松心情的舒缓旋律', gradient: 'linear-gradient(135deg,#13C2C2,#36CFC9)', keyword: '轻音乐 纯音乐 放松' },
@@ -4535,13 +4589,88 @@ function playAllRadioSongs() {
     }
 }
 
-/* ====== 首页数据加载 ====== */
+/* ========== 首页数据加载 ========== */
 
 const HOT_KEYWORDS = ['流行', '抖音热歌', '华语', '经典', '民谣'];
-const RANK_PREVIEW_SERVERS = ['netease', 'tencent', 'kugou'];
+const RANK_PREVIEW_SERVERS = ['netease', 'kugou'];
 const RANK_KEYWORD = '热歌榜';
+const NEW_SONG_KEYWORDS = ['新歌', '最新单曲', '新专辑', '新歌首发', '2025新歌', '2026新歌'];
 
 let homeDataLoaded = false;
+
+async function refreshHotRecommend() {
+    const grid = document.getElementById('hotGrid');
+    grid.style.opacity = '0.5';
+    try {
+        const hotSongs = await fetchHotRecommendations();
+        renderHotGrid(hotSongs);
+    } catch(e) {
+        console.error('刷新推荐失败:', e);
+    } finally {
+        grid.style.opacity = '1';
+    }
+}
+
+async function fetchNewSongs() {
+    const keyword = NEW_SONG_KEYWORDS[Math.floor(Math.random() * NEW_SONG_KEYWORDS.length)];
+    const results = await Promise.all(
+        ['netease', 'kugou'].map(async (server) => {
+            try {
+                const res = await fetch(`${API_BASE}/api?server=${server}&type=search&id=${encodeURIComponent(keyword)}`);
+                if (!res.ok) return { server, songs: [] };
+                const data = await res.json();
+                return { server, songs: (data && data.slice ? data.slice(0, 5) : []) };
+            } catch(e) {
+                return { server, songs: [] };
+            }
+        })
+    );
+    return results;
+}
+
+async function refreshNewSongs() {
+    const grid = document.getElementById('newSongsGrid');
+    grid.style.opacity = '0.5';
+    try {
+        const data = await fetchNewSongs();
+        renderNewSongs(data);
+    } catch(e) {
+        console.error('刷新新歌失败:', e);
+    } finally {
+        grid.style.opacity = '1';
+    }
+}
+
+function renderNewSongs(rankData) {
+    const grid = document.getElementById('newSongsGrid');
+    const serverNames = { netease:'网易云', kugou:'酷狗音乐' };
+    const serverColors = { netease:'#c20c0c', kugou:'#0c8dd9' };
+
+    grid.innerHTML = rankData.map(item => {
+        const name = serverNames[item.server] || item.server;
+        const color = serverColors[item.server] || '#1677FF';
+
+        let rowsHtml = '';
+        if (item.songs && item.songs.length > 0) {
+            rowsHtml = item.songs.map((song, i) => {
+                const sTitle = escapeHtml(song.title || '');
+                const sAuthor = escapeHtml(song.author || '');
+                const sUrl = escapeAttr(song.url || '');
+                const sPic = escapeAttr(song.pic || '');
+                const sId = escapeAttr(song.id || song.rid || String(i));
+                const sLrc = escapeAttr(song.lrc || '');
+                return `<div class="rp-row" onclick="playSongFromCard('${sTitle}','${sAuthor}','${sUrl}','${sPic}','${sId}','${item.server}','${sLrc}')"><span class="rp-rank">${i + 1}</span><span class="rp-name">${sTitle}</span><span class="rp-author">${sAuthor}</span></div>`;
+            }).join('');
+        } else {
+            rowsHtml = '<div class="rp-row"><span class="rp-name" style="color:#9ca3af">暂无数据</span></div>';
+        }
+
+        return `<div class="rp-card">
+            <div class="rp-header" style="border-left:3px solid ${color}"><span style="color:${color};font-weight:600">${name}</span></div>
+            ${rowsHtml}
+        </div>`;
+    }).join('');
+}
 
 async function loadHomeData() {
     if (homeDataLoaded) return;
@@ -4555,13 +4684,15 @@ async function loadHomeData() {
     errorEl.style.display = 'none';
     
     try {
-        const [hotSongs, rankData] = await Promise.all([
+        const [hotSongs, rankData, newSongsData] = await Promise.all([
             fetchHotRecommendations(),
-            fetchRankPreview()
+            fetchRankPreview(),
+            fetchNewSongs()
         ]);
-        
+
         renderHotGrid(hotSongs);
         renderRankPreview(rankData);
+        renderNewSongs(newSongsData);
         
         contentEl.style.display = '';
         homeDataLoaded = true;
@@ -4578,7 +4709,7 @@ async function fetchHotRecommendations() {
     const res = await fetch(`${API_BASE}/api?server=netease&type=search&id=${encodeURIComponent(keyword)}`);
     if (!res.ok) throw new Error('Hot API failed');
     const data = await res.json();
-    return (data && data.slice ? data.slice(0, 8) : []);
+    return (data && data.slice ? data.slice(0, 12) : []);
 }
 
 async function fetchRankPreview() {
@@ -4588,7 +4719,7 @@ async function fetchRankPreview() {
                 const res = await fetch(`${API_BASE}/api?server=${server}&type=search&id=${encodeURIComponent(RANK_KEYWORD)}`);
                 if (!res.ok) return { server, songs: [] };
                 const data = await res.json();
-                return { server, songs: (data && data.slice ? data.slice(0, 3) : []) };
+                return { server, songs: (data && data.slice ? data.slice(0, 5) : []) };
             } catch(e) {
                 return { server, songs: [] };
             }
@@ -4604,7 +4735,7 @@ function renderHotGrid(songs) {
         return;
     }
     
-    const serverNames = { netease:'网易云', tencent:'QQ音乐', kugou:'酷狗', baidu:'百度', kuwo:'酷我' };
+    const serverNames = { netease:'网易云', kugou:'酷狗音乐' };
     
     grid.innerHTML = songs.map((song, i) => {
         const safeTitle = escapeHtml(song.title || '');
@@ -4628,8 +4759,8 @@ function renderHotGrid(songs) {
 
 function renderRankPreview(rankData) {
     const grid = document.getElementById('rankPreviewGrid');
-    const serverNames = { netease:'网易云', tencent:'QQ音乐', kugou:'酷狗音乐', baidu:'百度音乐', kuwo:'酷我音乐' };
-    const serverColors = { netease:'#c20c0c', tencent:'#31c27c', kugou:'#0c8dd9' };
+    const serverNames = { netease:'网易云', kugou:'酷狗音乐' };
+    const serverColors = { netease:'#c20c0c', kugou:'#0c8dd9' };
     
     grid.innerHTML = rankData.map(item => {
         const name = serverNames[item.server] || item.server;
@@ -4663,7 +4794,10 @@ function renderRankPreview(rankData) {
     }).join('');
 }
 
-/* ====== 设置面板 ====== */
+/* ================================================================
+ *  11. 设置与主题系统
+ * ================================================================ */
+/* ========== 设置面板 ========== */
 var currentBgType = 'default';
 
 function initSettings() {
@@ -5054,7 +5188,10 @@ function applyDefaultTheme() {
     _injectHardcodedBlend(1);
 }
 
-/* ====== 自定义快捷键 ====== */
+/* ================================================================
+ *  12. 快捷键系统
+ * ================================================================ */
+/* ========== 自定义快捷键 ========== */
 var DEFAULT_SHORTCUTS = {
     togglePlay: { key: ' ', label: '播放 / 暂停', desc: '空格键' },
     seekBack: { key: 'ArrowLeft', label: '快退 5 秒', desc: '←' },
@@ -5202,7 +5339,9 @@ document.addEventListener('keydown', function(e) {
     }
 }, true);
 
-/* ====== 大屏模式 & 沉浸式模式 ====== */
+/* ================================================================
+ *  13. 大屏模式 & 沉浸式模式
+ * ================================================================ */
 var bsMode = false;
 var imMode = false;
 var bsLyricIndex = -1;
@@ -5407,6 +5546,10 @@ function syncBsRelatedInfo() {
     }
 }
 
+/* ================================================================
+ *  14. 页面初始化 & 事件绑定
+ * ================================================================ */
+/* ========== HTML 转义工具函数（DOM 实现） ========== */
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
@@ -5627,10 +5770,48 @@ function syncBsProgress() {
     var cur = currentPlayer.audio.currentTime;
     if (dur && isFinite(dur)) {
         var pct = isFinite(cur / dur) ? (cur / dur) * 100 : 0;
-        $('bsProgressFill').style.width = pct.toFixed(2) + '%';
+        // 拖动中不自动更新，避免回弹
+        if (!isBsDraggingProgress) {
+            $('bsProgressFill').style.width = pct.toFixed(2) + '%';
+        }
         $('bsCurTime').textContent = formatTime(cur);
         $('bsTotalTime').textContent = formatTime(dur);
     }
+}
+
+// ========== 大屏模式进度条拖动 ==========
+let isBsDraggingProgress = false;
+
+/** 大屏模式：根据鼠标/触摸位置计算并跳转到对应播放位置 */
+function seekBsPosition(e) {
+    if (!currentPlayer || !currentPlayer.audio || !currentPlayer.audio.duration) return;
+    var dur = currentPlayer.audio.duration;
+    if (!dur || !isFinite(dur)) return;
+    var pb = $('bsProgressBar');
+    if (!pb) return;
+    var rect = pb.getBoundingClientRect();
+    var pct = (e.clientX - rect.left) / rect.width;
+    pct = Math.max(0, Math.min(1, pct));
+    var targetTime = pct * dur;
+    currentPlayer.seek(targetTime);
+    // 拖动时即时更新 UI
+    var fillEl = $('bsProgressFill');
+    if (fillEl) fillEl.style.width = (pct * 100).toFixed(2) + '%';
+    $('bsCurTime').textContent = formatTime(targetTime);
+}
+
+/** 大屏模式：拖动过程中持续更新 */
+function onBsDragProgress(e) {
+    if (!isBsDraggingProgress) return;
+    seekBsPosition(e);
+}
+
+/** 大屏模式：停止拖动，恢复过渡动画 */
+function stopBsDragProgress() {
+    isBsDraggingProgress = false;
+    document.removeEventListener('mousemove', onBsDragProgress);
+    document.removeEventListener('mouseup', stopBsDragProgress);
+    var fe = $('bsProgressFill'); if (fe) fe.style.transition = '';
 }
 
 function syncImProgress() {
@@ -5683,13 +5864,35 @@ function bindBsEvents() {
     setClick('bsPlaylistBtn', window.togglePlaylist);
     var vs = $('bsVolumeSlider');
     if (vs) vs.oninput = function(e) { if (currentPlayer) currentPlayer.volume = e.target.value / 100; };
+    // 大屏模式进度条：点击 + 拖动（与普通模式一致）
     var pb = $('bsProgressBar');
-    if (pb) pb.onclick = function(e) {
-        if (!currentPlayer || !currentPlayer.audio) return;
-        var rect = this.getBoundingClientRect();
-        var pct = (e.clientX - rect.left) / rect.width;
-        currentPlayer.seek(currentPlayer.audio.duration * pct);
-    };
+    if (pb) {
+        pb.addEventListener('click', function(e) { seekBsPosition(e); });
+        pb.addEventListener('mousedown', function(e) {
+            isBsDraggingProgress = true;
+            var fe = $('bsProgressFill'); if (fe) fe.style.transition = 'none';
+            document.addEventListener('mousemove', onBsDragProgress);
+            document.addEventListener('mouseup', stopBsDragProgress);
+            seekBsPosition(e);
+        });
+        // 触摸设备支持
+        pb.addEventListener('touchstart', function(e) {
+            isBsDraggingProgress = true;
+            var fe = $('bsProgressFill'); if (fe) fe.style.transition = 'none';
+            var t = e.touches[0];
+            seekBsPosition({ clientX: t.clientX, clientY: t.clientY });
+            e.preventDefault();
+        }, { passive: false });
+        pb.addEventListener('touchmove', function(e) {
+            if (!isBsDraggingProgress) return;
+            var t = e.touches[0];
+            seekBsPosition({ clientX: t.clientX, clientY: t.clientY });
+            e.preventDefault();
+        }, { passive: false });
+        pb.addEventListener('touchend', function(e) {
+            stopBsDragProgress();
+        }, { passive: false });
+    }
 
     var tabs = document.querySelectorAll('.bs-tab');
     tabs.forEach(function(t, i) {
@@ -5751,12 +5954,318 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-/* ====== 页面初始化 ====== */
+/* ========== 页面初始化 ========== */
 document.addEventListener('DOMContentLoaded', function() {
     switchPanel('home');
     initSettings();
+    initAuth();
 });
 
+/* ================================================================
+ *  认证模块 (Auth)
+ * ================================================================ */
+var _authToken = localStorage.getItem('auth_token');
+var _authUser = null;
+try { _authUser = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+
+function getAuthToken() { return _authToken; }
+function getAuthUser() { return _authUser; }
+function isLoggedIn() { return !!_authToken; }
+
+function initAuth() {
+    if (_authToken && !_authUser) {
+        fetch(API_BASE + '/api/auth/me', { headers: { 'Authorization': 'Bearer ' + _authToken } })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.user) { _authUser = data.user; localStorage.setItem('auth_user', JSON.stringify(_authUser)); updateAuthUI(); }
+                else { clearAuth(); }
+            })
+            .catch(function() { clearAuth(); });
+    }
+    updateAuthUI();
+    document.getElementById('userTrigger').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (isLoggedIn()) {
+            document.getElementById('userDropdown').classList.toggle('show');
+        } else {
+            openAuthModal();
+        }
+    });
+    document.addEventListener('click', function(e) {
+        var dd = document.getElementById('userDropdown');
+        if (dd && !dd.contains(e.target) && e.target.id !== 'userTrigger') dd.classList.remove('show');
+    });
+    document.getElementById('authOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeAuthModal();
+    });
+    // 回车提交
+    document.getElementById('loginPassword').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('regPassword').addEventListener('keydown', function(e) { if (e.key === 'Enter') doRegister(); });
+}
+
+function updateAuthUI() {
+    var label = document.getElementById('userLabel');
+    var dd = document.getElementById('dropdownUsername');
+    var adminItem = document.getElementById('adminLink');
+    if (isLoggedIn() && _authUser) {
+        label.textContent = _authUser.username || _authUser.email;
+        if (dd) dd.textContent = _authUser.username || _authUser.email;
+        if (adminItem) adminItem.style.display = (_authUser.role === 'admin' || _authUser.role === 'super_admin') ? '' : 'none';
+    } else {
+        label.textContent = '登录';
+        if (dd) dd.textContent = '';
+        if (adminItem) adminItem.style.display = 'none';
+    }
+}
+
+function openAuthModal() {
+    document.getElementById('authOverlay').classList.add('show');
+    switchAuthTab('login');
+}
+function closeAuthModal() {
+    document.getElementById('authOverlay').classList.remove('show');
+    clearAuthForm();
+}
+
+function switchAuthTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(function(t) { t.classList.toggle('active', t.textContent === (tab === 'login' ? '登录' : '注册')); });
+    document.getElementById('authFormLogin').classList.toggle('active', tab === 'login');
+    document.getElementById('authFormRegister').classList.toggle('active', tab === 'register');
+    document.getElementById('authTitle').textContent = tab === 'login' ? '登录' : '注册';
+    document.getElementById('authSubtitle').textContent = tab === 'login' ? '登录后可同步收藏和播放历史' : '注册新账号';
+    if (tab === 'register' && !_captchaEnabled) {
+        fetch(API_BASE + '/api/auth/captcha-enabled').then(function(r) { return r.json(); }).then(function(data) {
+            if (data.enabled) {
+                _captchaEnabled = true;
+                document.getElementById('captcha-field').style.display = 'block';
+                refreshCaptcha();
+            }
+        }).catch(function() {});
+    }
+}
+
+function clearAuthForm() {
+    ['loginEmail','loginPassword','regEmail','regCode','regUsername','regPassword','loginCodeEmail','loginCode','loginCaptchaInput'].forEach(function(id) {
+        var el = document.getElementById(id); if (el) el.value = '';
+    });
+    ['loginMsg','registerMsg','codeMsg','loginCodeMsg'].forEach(function(id) {
+        var el = document.getElementById(id); if (el) { el.textContent = ''; el.className = 'auth-msg'; }
+    });
+}
+
+var _loginMethod = 'password'; // 'password' | 'code'
+var _loginCodeCountdown = 0;
+var _loginCaptchaKey = '';
+
+function switchLoginMethod(method) {
+    _loginMethod = method;
+    document.querySelectorAll('.auth-login-tab').forEach(function(t) {
+        t.classList.toggle('active', t.textContent === (method === 'password' ? '密码登录' : '验证码登录'));
+    });
+    document.getElementById('loginByPassword').style.display = method === 'password' ? '' : 'none';
+    document.getElementById('loginByCode').style.display = method === 'code' ? '' : 'none';
+    document.getElementById('loginMsg').textContent = '';
+    if (method === 'code') {
+        // 检查图形验证码是否启用
+        if (!_captchaEnabled) {
+            fetch(API_BASE + '/api/auth/captcha-enabled').then(function(r) { return r.json(); }).then(function(data) {
+                if (data.enabled) {
+                    _captchaEnabled = true;
+                    document.getElementById('login-captcha-field').style.display = 'block';
+                    refreshLoginCaptcha();
+                }
+            }).catch(function() {});
+        } else {
+            document.getElementById('login-captcha-field').style.display = 'block';
+            refreshLoginCaptcha();
+        }
+    }
+}
+
+function refreshLoginCaptcha() {
+    fetch(API_BASE + '/api/auth/captcha').then(function(r) {
+        _loginCaptchaKey = r.headers.get('X-Captcha-Key') || '';
+        return r.text();
+    }).then(function(svg) {
+        document.getElementById('loginCaptchaImg').src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+        document.getElementById('loginCaptchaInput').value = '';
+    }).catch(function() {});
+}
+
+function doSendLoginCode() {
+    var email = document.getElementById('loginCodeEmail').value.trim();
+    var msg = document.getElementById('loginCodeMsg');
+    msg.textContent = ''; msg.className = 'auth-msg';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = '请输入正确的邮箱'; msg.className = 'auth-msg error'; return; }
+    if (_captchaEnabled && !document.getElementById('loginCaptchaInput').value.trim()) { msg.textContent = '请输入图形验证码'; msg.className = 'auth-msg error'; return; }
+    var btn = document.getElementById('loginSendCodeBtn'); btn.disabled = true;
+    var body = { email: email, type: 'login' };
+    if (_captchaEnabled) { body.captchaKey = _loginCaptchaKey; body.captchaCode = document.getElementById('loginCaptchaInput').value.trim(); }
+    fetch(API_BASE + '/api/auth/send-code', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.success) {
+            msg.textContent = '验证码已发送'; msg.className = 'auth-msg success';
+            _loginCodeCountdown = 60;
+            var timer = setInterval(function() {
+                _loginCodeCountdown--;
+                btn.textContent = _loginCodeCountdown + 's';
+                if (_loginCodeCountdown <= 0) { clearInterval(timer); btn.disabled = false; btn.textContent = '发送验证码'; }
+            }, 1000);
+        } else { msg.textContent = data.message || '发送失败'; msg.className = 'auth-msg error'; btn.disabled = false; }
+        if (_captchaEnabled) refreshLoginCaptcha();
+    }).catch(function() { msg.textContent = '网络错误'; msg.className = 'auth-msg error'; btn.disabled = false; });
+}
+
+function doLogin() {
+    var msg = document.getElementById('loginMsg');
+    msg.textContent = ''; msg.className = 'auth-msg';
+    var btn = document.getElementById('loginBtn'); btn.disabled = true; btn.textContent = '登录中...';
+
+    if (_loginMethod === 'code') {
+        // 验证码登录
+        var email = document.getElementById('loginCodeEmail').value.trim();
+        var code = document.getElementById('loginCode').value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = '请输入正确的邮箱'; msg.className = 'auth-msg error'; btn.disabled = false; btn.textContent = '登录'; return; }
+        if (!code) { msg.textContent = '请输入验证码'; msg.className = 'auth-msg error'; btn.disabled = false; btn.textContent = '登录'; return; }
+        fetch(API_BASE + '/api/auth/login-code', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, code: code })
+        }).then(function(r) { return r.json(); }).then(function(data) {
+            btn.disabled = false; btn.textContent = '登录';
+            if (data.success) {
+                _authToken = data.token; _authUser = data.user;
+                localStorage.setItem('auth_token', _authToken);
+                localStorage.setItem('auth_user', JSON.stringify(_authUser));
+                updateAuthUI(); closeAuthModal();
+                showToast('登录成功', 'success');
+                syncFavoritesToServer();
+            } else { msg.textContent = data.message || '登录失败'; msg.className = 'auth-msg error'; }
+        }).catch(function() { btn.disabled = false; btn.textContent = '登录'; msg.textContent = '网络错误'; msg.className = 'auth-msg error'; });
+    } else {
+        // 密码登录
+        var email = document.getElementById('loginEmail').value.trim();
+        var password = document.getElementById('loginPassword').value;
+        if (!email || !password) { msg.textContent = '请填写用户名/邮箱和密码'; msg.className = 'auth-msg error'; btn.disabled = false; btn.textContent = '登录'; return; }
+        fetch(API_BASE + '/api/auth/login', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, password: password })
+        }).then(function(r) { return r.json(); }).then(function(data) {
+            btn.disabled = false; btn.textContent = '登录';
+            if (data.success) {
+                _authToken = data.token; _authUser = data.user;
+                localStorage.setItem('auth_token', _authToken);
+                localStorage.setItem('auth_user', JSON.stringify(_authUser));
+                updateAuthUI(); closeAuthModal();
+                showToast('登录成功', 'success');
+                syncFavoritesToServer();
+            } else { msg.textContent = data.message || '登录失败'; msg.className = 'auth-msg error'; }
+        }).catch(function() { btn.disabled = false; btn.textContent = '登录'; msg.textContent = '网络错误'; msg.className = 'auth-msg error'; });
+    }
+}
+
+var _codeCountdown = 0;
+var _captchaEnabled = false;
+var _captchaKey = '';
+
+function refreshCaptcha() {
+    fetch(API_BASE + '/api/auth/captcha').then(function(r) {
+        _captchaKey = r.headers.get('X-Captcha-Key') || '';
+        return r.text();
+    }).then(function(svg) {
+        document.getElementById('captchaImg').src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+        document.getElementById('captchaInput').value = '';
+    }).catch(function() {});
+}
+
+function doSendCode() {
+    var email = document.getElementById('regEmail').value.trim();
+    var msg = document.getElementById('codeMsg');
+    msg.textContent = ''; msg.className = 'auth-msg';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = '请输入正确的邮箱'; msg.className = 'auth-msg error'; return; }
+    if (_captchaEnabled && !document.getElementById('captchaInput').value.trim()) { msg.textContent = '请输入图形验证码'; msg.className = 'auth-msg error'; return; }
+    var btn = document.getElementById('sendCodeBtn'); btn.disabled = true;
+    var body = { email: email, type: 'register' };
+    if (_captchaEnabled) { body.captchaKey = _captchaKey; body.captchaCode = document.getElementById('captchaInput').value.trim(); }
+    fetch(API_BASE + '/api/auth/send-code', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.success) {
+            msg.textContent = '验证码已发送'; msg.className = 'auth-msg success';
+            _codeCountdown = 60;
+            var timer = setInterval(function() {
+                _codeCountdown--;
+                btn.textContent = _codeCountdown + 's';
+                if (_codeCountdown <= 0) { clearInterval(timer); btn.disabled = false; btn.textContent = '发送验证码'; }
+            }, 1000);
+        } else { msg.textContent = data.message || '发送失败'; msg.className = 'auth-msg error'; btn.disabled = false; }
+        if (_captchaEnabled) refreshCaptcha();
+    }).catch(function() { msg.textContent = '网络错误'; msg.className = 'auth-msg error'; btn.disabled = false; });
+}
+
+function doRegister() {
+    var email = document.getElementById('regEmail').value.trim();
+    var code = document.getElementById('regCode').value.trim();
+    var username = document.getElementById('regUsername').value.trim();
+    var password = document.getElementById('regPassword').value;
+    var msg = document.getElementById('registerMsg');
+    msg.textContent = ''; msg.className = 'auth-msg';
+    if (!email || !code || !username || !password) { msg.textContent = '请填写所有字段'; msg.className = 'auth-msg error'; return; }
+    var btn = document.getElementById('registerBtn'); btn.disabled = true; btn.textContent = '注册中...';
+    fetch(API_BASE + '/api/auth/register', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, code: code, username: username, password: password })
+    }).then(function(r) { return r.json(); }).then(function(data) {
+        btn.disabled = false; btn.textContent = '注册';
+        if (data.success) {
+            _authToken = data.token; _authUser = data.user;
+            localStorage.setItem('auth_token', _authToken);
+            localStorage.setItem('auth_user', JSON.stringify(_authUser));
+            updateAuthUI(); closeAuthModal();
+            showToast('注册成功', 'success');
+            syncFavoritesToServer();
+        } else { msg.textContent = data.message || '注册失败'; msg.className = 'auth-msg error'; }
+    }).catch(function() { btn.disabled = false; btn.textContent = '注册'; msg.textContent = '网络错误'; msg.className = 'auth-msg error'; });
+}
+
+function doLogout() {
+    document.getElementById('userDropdown').classList.remove('show');
+    if (_authToken) {
+        fetch(API_BASE + '/api/auth/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + _authToken } }).catch(function(){});
+    }
+    clearAuth();
+    showToast('已退出登录', 'info');
+}
+
+function clearAuth() {
+    _authToken = null; _authUser = null;
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
+    updateAuthUI();
+}
+
+/* 同步本地收藏到服务器 */
+function syncFavoritesToServer() {
+    if (!isLoggedIn()) return;
+    var favs = getFavorites();
+    favs.forEach(function(song) {
+        fetch(API_BASE + '/api/user/favorites', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _authToken },
+            body: JSON.stringify({ server: song.server || 'netease', songId: String(song.id), songName: song.title, artist: song.author, album: song.album || '' })
+        }).catch(function(){});
+    });
+}
+
+/* 带认证的 fetch 封装 */
+function authFetch(url, options) {
+    options = options || {};
+    options.headers = options.headers || {};
+    if (_authToken) options.headers['Authorization'] = 'Bearer ' + _authToken;
+    return fetch(url, options);
+}
 </script>
 
 <!-- 设置面板 -->
@@ -5835,5 +6344,95 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div>
+
+<!-- 登录/注册弹窗 -->
+<div class="auth-overlay" id="authOverlay">
+    <div class="auth-modal">
+        <div class="auth-header" style="position:relative;">
+            <h2 id="authTitle">登录</h2>
+            <p id="authSubtitle">登录后可同步收藏和播放历史</p>
+            <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+        </div>
+        <div class="auth-body">
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">登录</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">注册</div>
+            </div>
+            <!-- 登录表单 -->
+            <div class="auth-form active" id="authFormLogin">
+                <div class="auth-login-tabs">
+                    <div class="auth-login-tab active" onclick="switchLoginMethod('password')">密码登录</div>
+                    <div class="auth-login-tab" onclick="switchLoginMethod('code')">验证码登录</div>
+                </div>
+                <!-- 密码登录 -->
+                <div id="loginByPassword">
+                    <div class="auth-field">
+                        <label>用户名/邮箱</label>
+                        <input type="text" id="loginEmail" placeholder="请输入用户名或邮箱">
+                    </div>
+                    <div class="auth-field">
+                        <label>密码</label>
+                        <input type="password" id="loginPassword" placeholder="请输入密码">
+                    </div>
+                </div>
+                <!-- 验证码登录 -->
+                <div id="loginByCode" style="display:none">
+                    <div class="auth-field">
+                        <label>邮箱</label>
+                        <input type="email" id="loginCodeEmail" placeholder="请输入邮箱">
+                    </div>
+                    <div class="auth-field">
+                        <label>验证码</label>
+                        <div class="auth-field-row">
+                            <input type="text" id="loginCode" placeholder="6位验证码" maxlength="6">
+                            <button class="auth-code-btn" id="loginSendCodeBtn" onclick="doSendLoginCode()">发送验证码</button>
+                        </div>
+                        <div class="auth-msg" id="loginCodeMsg"></div>
+                    </div>
+                    <div id="login-captcha-field" style="margin-bottom:12px;display:none">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <input type="text" id="loginCaptchaInput" placeholder="验证码" maxlength="4" style="flex:1;padding:10px;border:1px solid #d1d5db;border-radius:8px;font-size:14px">
+                            <img id="loginCaptchaImg" src="" alt="验证码" style="height:40px;border-radius:4px;cursor:pointer" onclick="refreshLoginCaptcha()" title="点击刷新">
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-msg" id="loginMsg"></div>
+                <button class="auth-submit" id="loginBtn" onclick="doLogin()">登录</button>
+            </div>
+            <!-- 注册表单 -->
+            <div class="auth-form" id="authFormRegister">
+                <div class="auth-field">
+                    <label>邮箱</label>
+                    <input type="email" id="regEmail" placeholder="请输入邮箱">
+                </div>
+                <div class="auth-field">
+                    <label>验证码</label>
+                    <div class="auth-field-row">
+                        <input type="text" id="regCode" placeholder="6位验证码" maxlength="6">
+                        <button class="auth-code-btn" id="sendCodeBtn" onclick="doSendCode()">发送验证码</button>
+                    </div>
+                    <div class="auth-msg" id="codeMsg"></div>
+                </div>
+                <div id="captcha-field" style="margin-bottom:12px;display:none">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <input type="text" id="captchaInput" placeholder="验证码" maxlength="4" style="flex:1;padding:10px;border:1px solid #d1d5db;border-radius:8px;font-size:14px">
+                        <img id="captchaImg" src="" alt="验证码" style="height:40px;border-radius:4px;cursor:pointer" onclick="refreshCaptcha()" title="点击刷新">
+                    </div>
+                </div>
+                <div class="auth-field">
+                    <label>用户名</label>
+                    <input type="text" id="regUsername" placeholder="至少3个字符">
+                </div>
+                <div class="auth-field">
+                    <label>密码</label>
+                    <input type="password" id="regPassword" placeholder="至少6个字符">
+                </div>
+                <div class="auth-msg" id="registerMsg"></div>
+                <button class="auth-submit" id="registerBtn" onclick="doRegister()">注册</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
